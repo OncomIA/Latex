@@ -1,0 +1,21 @@
+steps:
+- name: gcr.io/k8s-skaffold/pack
+  args:
+    - build
+    - europe-west1-docker.pkg.dev/$PROJECT_ID/oncomia-apps/latex:$SHORT_SHA
+    - --builder=gcr.io/buildpacks/builder:v1
+
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  entrypoint: gcloud
+  args:
+    - run
+    - deploy
+    - latex
+    - --image=europe-west1-docker.pkg.dev/$PROJECT_ID/oncomia-apps/latex:$SHORT_SHA
+    - --region=europe-west1
+    - --platform=managed
+    - --allow-unauthenticated
+    - --port=8080
+
+images:
+- europe-west1-docker.pkg.dev/$PROJECT_ID/oncomia-apps/latex:$SHORT_SHA
