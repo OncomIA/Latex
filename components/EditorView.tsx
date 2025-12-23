@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ProjectState, LatexFile } from '../types';
+import { ProjectState, LatexFile } from '../types.ts';
 
 interface EditorViewProps {
   project: ProjectState;
@@ -12,10 +12,6 @@ const EditorView: React.FC<EditorViewProps> = ({ project }) => {
   const handleOpenInOverleaf = () => {
     // Overleaf "Open in Overleaf" API uses a form submission
     // We create a temporary form to POST the content as a ZIP or multi-file payload
-    // Note: Standard way for browsers is ZIP download + manual upload, 
-    // but we can generate a simple direct link to Overleaf via GitHub if we had integration.
-    // Here we'll simulate the "Download for Overleaf" action.
-    
     const blob = new Blob([JSON.stringify(project.files, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -53,7 +49,6 @@ const EditorView: React.FC<EditorViewProps> = ({ project }) => {
       </div>
 
       <div className="flex-1 flex gap-4 min-h-0">
-        {/* File Explorer */}
         <div className="w-64 bg-white rounded-xl shadow-sm border border-slate-200 overflow-y-auto p-4">
           <h3 className="text-xs font-bold text-slate-400 uppercase mb-4">Project Files</h3>
           <div className="space-y-1">
@@ -72,7 +67,6 @@ const EditorView: React.FC<EditorViewProps> = ({ project }) => {
           </div>
         </div>
 
-        {/* Code View */}
         <div className="flex-1 bg-slate-900 rounded-xl shadow-xl border border-slate-800 flex flex-col min-h-0">
           <div className="flex items-center justify-between px-6 py-3 border-b border-slate-800">
             <span className="text-slate-400 text-sm font-mono">{selectedFile.path}</span>

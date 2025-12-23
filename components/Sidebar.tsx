@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ProjectState } from '../types';
+import { ProjectState } from '../types.ts';
 
 interface SidebarProps {
   projects: ProjectState[];
