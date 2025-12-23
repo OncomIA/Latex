@@ -1,0 +1,5 @@
+{
+  "name": "LaTeX Overleaf Architect",
+  "description": "A professional tool to convert Word and PDF documents into structured LaTeX projects (Books or Articles) ready for Overleaf.",
+  "requestFramePermissions": []
+}
